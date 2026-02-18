@@ -70,9 +70,28 @@ function initVideoModal() {
     const modalVideo = document.getElementById('modalVideo');
     const modalClose = document.querySelector('.modal-close');
     
+    // Video facades (Demo Reel)
+    const videoFacades = document.querySelectorAll('.video-facade');
+    videoFacades.forEach(facade => {
+        facade.addEventListener('click', () => {
+            const videoId = facade.dataset.vimeoId;
+            if (videoId) {
+                openVideoModal(videoId);
+            }
+        });
+    });
+    
     // Content cards
     const contentCards = document.querySelectorAll('.content-card');
     contentCards.forEach(card => {
+        card.addEventListener('click', () => {
+            openVideoModal(card.dataset.video);
+        });
+    });
+    
+    // Show cards
+    const showCards = document.querySelectorAll('.show-card');
+    showCards.forEach(card => {
         card.addEventListener('click', () => {
             openVideoModal(card.dataset.video);
         });
