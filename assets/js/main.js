@@ -1,12 +1,11 @@
 /**
- * NINO MARTINEZ - WILDCARD STYLE
- * Streaming Service Inspired Portfolio
+ * NINO MARTINEZ PORTFOLIO
+ * Simple, reliable JavaScript
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initVideoModal();
-    initContentSliders();
     initSmoothScroll();
 });
 
@@ -17,10 +16,8 @@ function initNavigation() {
     const nav = document.getElementById('nav');
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
-    const navLinks = document.querySelectorAll('.nav-link');
 
-    // Scroll effect
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
         } else {
@@ -28,149 +25,130 @@ function initNavigation() {
         }
     });
 
-    // Mobile toggle
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    // Close menu on link click
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-    });
 
-    // Active link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY + 100;
-        sections.forEach(section => {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
-            const id = section.getAttribute('id');
-            const link = document.querySelector(`.nav-link[href="#${id}"]`);
-            
-            if (link) {
-                if (scrollY >= top && scrollY < top + height) {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                }
-            }
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
         });
-    });
+    }
 }
 
 /**
- * Video Modal
+ * Video Modal with Prev/Next Navigation
  */
 function initVideoModal() {
     const modal = document.getElementById('videoModal');
     const modalVideo = document.getElementById('modalVideo');
     const modalClose = document.querySelector('.modal-close');
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
     
-    // Video facades (Demo Reel)
-    const videoFacades = document.querySelectorAll('.video-facade');
-    videoFacades.forEach(facade => {
-        facade.addEventListener('click', () => {
-            const videoId = facade.dataset.vimeoId;
-            if (videoId) {
-                openVideoModal(videoId);
-            }
-        });
+    if (!modal || !modalVideo) return;
+
+    // Collect all video IDs from show cards
+    const showCards = document.querySelectorAll('.show-card[data-video]');
+    const videoIds = [];
+    showCards.forEach(function(card) {
+        videoIds.push(card.getAttribute('data-video'));
     });
     
-    // Content cards
-    const contentCards = document.querySelectorAll('.content-card');
-    contentCards.forEach(card => {
-        card.addEventListener('click', () => {
-            openVideoModal(card.dataset.video);
-        });
-    });
-    
-    // Show cards
-    const showCards = document.querySelectorAll('.show-card');
-    showCards.forEach(card => {
-        card.addEventListener('click', () => {
-            openVideoModal(card.dataset.video);
+    let currentIndex = 0;
+
+    // Click handlers for show cards
+    showCards.forEach(function(card, index) {
+        card.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentIndex = index;
+            openModal(videoIds[currentIndex]);
         });
     });
 
-    // Play button in billboard
-    const playButtons = document.querySelectorAll('.btn-play');
-    playButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            openVideoModal(btn.dataset.video);
-        });
-    });
-
-    // Info button scroll
-    const infoButtons = document.querySelectorAll('.btn-info');
-    infoButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = document.querySelector(btn.dataset.target);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    function openVideoModal(videoId) {
-        if (!videoId || !modal || !modalVideo) return;
-        modalVideo.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`;
+    // Open modal
+    function openModal(videoId) {
+        modalVideo.src = 'https://player.vimeo.com/video/' + videoId + '?autoplay=1&title=0&byline=0&portrait=0';
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        updateNavButtons();
     }
 
+    // Close modal
     function closeModal() {
         modal.classList.remove('active');
         modalVideo.src = '';
         document.body.style.overflow = '';
     }
 
-    if (modalClose) {
-        modalClose.addEventListener('click', closeModal);
+    // Update nav button visibility
+    function updateNavButtons() {
+        if (modalPrev) {
+            modalPrev.style.display = currentIndex > 0 ? 'flex' : 'none';
+        }
+        if (modalNext) {
+            modalNext.style.display = currentIndex < videoIds.length - 1 ? 'flex' : 'none';
+        }
     }
-    
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
+
+    // Previous video
+    if (modalPrev) {
+        console.log('Setting up prev button');
+        modalPrev.addEventListener('click', function(e) {
+            console.log('Prev clicked, currentIndex:', currentIndex);
+            e.preventDefault();
+            e.stopPropagation();
+            if (currentIndex > 0) {
+                currentIndex--;
+                console.log('Going to video:', currentIndex, videoIds[currentIndex]);
+                openModal(videoIds[currentIndex]);
+            }
         });
     }
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+    // Next video
+    if (modalNext) {
+        console.log('Setting up next button');
+        modalNext.addEventListener('click', function(e) {
+            console.log('Next clicked, currentIndex:', currentIndex);
+            e.preventDefault();
+            e.stopPropagation();
+            if (currentIndex < videoIds.length - 1) {
+                currentIndex++;
+                console.log('Going to video:', currentIndex, videoIds[currentIndex]);
+                openModal(videoIds[currentIndex]);
+            }
+        });
+    }
+
+    // Close button
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+
+    // Click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
             closeModal();
         }
     });
-}
 
-/**
- * Content Sliders
- */
-function initContentSliders() {
-    const sliders = document.querySelectorAll('.content-slider');
-    
-    sliders.forEach(slider => {
-        const track = slider.querySelector('.content-track');
-        const prevBtn = slider.querySelector('.slider-prev');
-        const nextBtn = slider.querySelector('.slider-next');
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (!modal.classList.contains('active')) return;
         
-        if (!track) return;
-        
-        const scrollAmount = 420;
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            });
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            });
+        if (e.key === 'Escape') {
+            closeModal();
+        } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+            currentIndex--;
+            openModal(videoIds[currentIndex]);
+        } else if (e.key === 'ArrowRight' && currentIndex < videoIds.length - 1) {
+            currentIndex++;
+            openModal(videoIds[currentIndex]);
         }
     });
 }
@@ -179,21 +157,15 @@ function initContentSliders() {
  * Smooth Scroll
  */
 function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 const offset = 70;
                 const top = target.getBoundingClientRect().top + window.scrollY - offset;
-                window.scrollTo({ top, behavior: 'smooth' });
+                window.scrollTo({ top: top, behavior: 'smooth' });
             }
         });
     });
 }
-
-/**
- * Console signature
- */
-console.log('%c📺 NINO+', 'font-size: 20px; font-weight: bold; color: #e50914;');
-console.log('%cNino Martinez, ACE — Producer | Editor', 'font-size: 12px; color: #888;');

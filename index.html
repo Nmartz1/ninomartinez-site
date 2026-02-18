@@ -48,7 +48,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="assets/css/style.css?v=9">
+    <link rel="stylesheet" href="assets/css/style.css?v=10">
 </head>
 <body>
     <!-- Film Grain Overlay -->
@@ -148,11 +148,8 @@
             </div>
             <div class="reel-content">
                 <div class="reel-video">
-                    <div class="video-container video-facade" data-vimeo-id="23429927">
-                        <img src="assets/images/a-play-reel.jpg" alt="Demo Reel" class="video-poster">
-                        <button class="video-play-btn" aria-label="Play video">
-                            <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-3.07-5.23-6-6.01C55.22 0 34 0 34 0S12.78 0 7.48 1.73c-2.93.78-5.22 3.08-6 6.01C0 13.04 0 24 0 24s0 10.96 1.48 16.26c.78 2.93 3.07 5.22 6 6.01C12.78 48 34 48 34 48s21.22 0 26.52-1.73c2.93-.78 5.22-3.08 6-6.01C68 34.96 68 24 68 24s0-10.96-1.48-16.26z" fill="rgba(201,168,76,0.95)"/><path d="M45 24L27 14v20" fill="#000"/></svg>
-                        </button>
+                    <div style="position:relative;padding-top:56.25%;width:100%;">
+                        <iframe src="https://player.vimeo.com/video/23429927?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                     </div>
                 </div>
                 <p class="reel-description">A showcase of two decades in television — from scripted drama to documentary filmmaking.</p>
@@ -169,18 +166,18 @@
             </div>
             <p class="networks-intro">Trusted by major streamers and networks worldwide</p>
             <div class="networks-grid">
-                <div class="network-logo"><img src="assets/images/fx_international_logo.png" alt="FX" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/discovery_channel_logo.png" alt="Discovery Channel" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/history_channel_logo.png" alt="History Channel" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/nat_geo_hd.png" alt="National Geographic" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/warner_bros_logo.png" alt="Warner Bros" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/hbo_logo.png" alt="HBO" loading="lazy"></div>
                 <div class="network-logo"><img src="assets/images/netflix_logo.png" alt="Netflix" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/paramount_logo.png" alt="Paramount" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/disney_logo.png" alt="Disney" loading="lazy"></div>
-                <div class="network-logo"><img src="assets/images/appletv_logo.png" alt="Apple TV" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/hbo_logo.png" alt="HBO" loading="lazy"></div>
                 <div class="network-logo"><img src="assets/images/amazon_prime_logo.png" alt="Amazon Prime" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/disney_logo.png" alt="Disney+" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/appletv_logo.png" alt="Apple TV+" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/paramount_logo.png" alt="Paramount+" loading="lazy"></div>
                 <div class="network-logo"><img src="assets/images/peacock_logo.png" alt="Peacock" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/hulu_logo.png" alt="Hulu" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/discovery_channel_logo.png" alt="Discovery" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/fx_international_logo.png" alt="FX" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/nat_geo_hd.png" alt="National Geographic" loading="lazy"></div>
+                <div class="network-logo"><img src="assets/images/history_channel_logo.png" alt="History" loading="lazy"></div>
             </div>
         </div>
     </section>
@@ -378,16 +375,16 @@
 
     <!-- Video Modal -->
     <div class="modal" id="videoModal">
-        <button class="modal-nav modal-prev" aria-label="Previous">&#10094;</button>
+        <button class="modal-nav modal-prev" id="modalPrev" aria-label="Previous">&#10094;</button>
         <div class="modal-content">
             <button class="modal-close" aria-label="Close">&times;</button>
             <div class="modal-video">
                 <iframe id="modalVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen playsinline webkit-playsinline></iframe>
             </div>
         </div>
-        <button class="modal-nav modal-next" aria-label="Next">&#10095;</button>
+        <button class="modal-nav modal-next" id="modalNext" aria-label="Next">&#10095;</button>
     </div>
 
-    <script src="assets/js/main.js?v=9"></script>
+    <script src="assets/js/main.js?v=10"></script>
 </body>
 </html>
