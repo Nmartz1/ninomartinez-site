@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <defs>
+    <style>
+      .ln{fill:none;stroke:#2b2e8f;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+      .fl{fill:#2b2e8f}
+      .tx{fill:#2b2e8f;font-family:"Arial Rounded MT Bold","Nunito","Helvetica Neue",Arial,sans-serif;font-weight:800;text-anchor:middle;letter-spacing:1px}
+    </style>
+  </defs>
+  <rect width="320" height="320" rx="28" fill="#f7ec2a"/>
+  <!-- crown -->
+  <path class="ln" d="M94 128 L102 62 L116 100 L131 46 L145 92 L160 32 L175 92 L189 46 L203 100 L218 62 L226 128 Z"/>
+  <circle class="fl" cx="102" cy="58" r="7"/>
+  <circle class="fl" cx="131" cy="42" r="7"/>
+  <circle class="fl" cx="160" cy="28" r="7"/>
+  <circle class="fl" cx="189" cy="42" r="7"/>
+  <circle class="fl" cx="218" cy="58" r="7"/>
+  <path class="ln" d="M97 114 L223 114"/>
+  <circle class="ln" cx="124" cy="121" r="4.5"/>
+  <circle class="ln" cx="160" cy="121" r="4.5"/>
+  <circle class="ln" cx="196" cy="121" r="4.5"/>
+  <!-- top bun -->
+  <path class="ln" d="M64 188 C64 150 100 128 160 128 C220 128 256 150 256 188 Z"/>
+  <ellipse class="fl" cx="118" cy="156" rx="6" ry="3" transform="rotate(-25 118 156)"/>
+  <ellipse class="fl" cx="146" cy="146" rx="6" ry="3" transform="rotate(-10 146 146)"/>
+  <ellipse class="fl" cx="176" cy="146" rx="6" ry="3" transform="rotate(10 176 146)"/>
+  <ellipse class="fl" cx="204" cy="158" rx="6" ry="3" transform="rotate(25 204 158)"/>
+  <ellipse class="fl" cx="132" cy="172" rx="6" ry="3" transform="rotate(-15 132 172)"/>
+  <ellipse class="fl" cx="188" cy="172" rx="6" ry="3" transform="rotate(15 188 172)"/>
+  <!-- lettuce -->
+  <path class="ln" d="M60 194 C68 186 76 202 84 194 C92 186 100 202 108 194 C116 186 124 202 132 194 C140 186 148 202 156 194 C164 186 172 202 180 194 C188 186 196 202 204 194 C212 186 220 202 228 194 C236 186 244 202 252 194 C256 190 260 192 262 196"/>
+  <!-- cheese -->
+  <path class="ln" d="M72 204 L250 204 M100 204 L106 215 L112 204 M210 204 L216 215 L222 204"/>
+  <!-- patty -->
+  <rect class="ln" x="70" y="210" width="182" height="20" rx="10"/>
+  <!-- bottom bun -->
+  <path class="ln" d="M66 236 L254 236 C254 258 234 270 160 270 C86 270 66 258 66 236 Z"/>
+  <!-- text -->
+  <text class="tx" x="160" y="293" font-size="20">BERGER KING</text>
+  <text class="tx" x="160" y="313" font-size="20">COMBO</text>
+</svg>
