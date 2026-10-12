@@ -50,20 +50,22 @@
 
   /* The dedication page: a book that asks for a name */
   .ded{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:center;}
-  .page{background:#d9ccb2;color:#2a221b;padding:clamp(2rem,5vw,3.2rem) clamp(1.6rem,4vw,2.8rem);box-shadow:0 30px 80px rgba(0,0,0,.7);position:relative;transform:rotate(-1.2deg);
-        background-image:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.25),transparent 55%),radial-gradient(ellipse at 90% 100%,rgba(80,50,20,.28),transparent 60%);}
-  .page .head{font-family:var(--display);letter-spacing:.3em;font-size:.8rem;text-align:center;color:#5a4a3a;}
-  .page .line{font-family:var(--hand);font-size:clamp(1.7rem,4.2vw,2.4rem);text-align:center;margin-top:1.4rem;min-height:3.6rem;line-height:1.2;}
-  .page .line .name{color:var(--blood);}
-  .page .drip{position:absolute;right:7%;top:0;width:3px;height:0;opacity:0;
+  /* The dedication is written onto the book from the poster: the demon's hand rests on it, the visitor's line inks the right page */
+  .page{position:relative;aspect-ratio:1024/820;background:#0c0908 url(img/card_book.jpg) center/cover no-repeat;container-type:inline-size;
+        box-shadow:0 30px 80px rgba(0,0,0,.7);}
+  .page .head{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+  .page .line{position:absolute;left:54%;top:50%;width:32%;font-family:var(--hand);font-size:4.7cqw;line-height:1.18;text-align:center;
+        color:rgba(46,30,18,.86);text-shadow:0 0 .4px rgba(46,30,18,.5);transform:rotate(3deg);}
+  .page .line .name{color:#7d0d08;}
+  .page .drip{position:absolute;left:51.6%;top:43.6%;width:3px;height:0;opacity:0;
         background:linear-gradient(180deg,#4a0603,#7d0d08 30%,#8f110b);border-radius:0 0 2px 2px;
         filter:drop-shadow(0 0 .5px rgba(60,0,0,.6));}
   .page .drip::before{content:"";position:absolute;left:-4px;top:-3px;width:11px;height:7px;border-radius:50% 50% 45% 55%;background:#5a0804;}
   .page .drip::after{content:"";position:absolute;left:50%;bottom:-9px;width:8px;height:11px;transform:translateX(-50%);
         border-radius:50% 50% 50% 50% / 35% 35% 65% 65%;background:radial-gradient(circle at 38% 65%,#b52418 0 12%,#8f110b 40%,#4a0603 100%);}
   .page.signed .drip{opacity:1;animation:run 6.5s cubic-bezier(.45,.05,.55,.95) forwards;}
-  @keyframes run{0%{height:0}12%{height:9%}24%{height:11%}42%{height:26%}55%{height:28%}78%{height:47%}100%{height:58%}}
-  @media (prefers-reduced-motion:reduce){.page.signed .drip{animation:none;height:40%}}
+  @keyframes run{0%{height:0}12%{height:4%}24%{height:5.5%}42%{height:12%}55%{height:13.5%}78%{height:22%}100%{height:29%}}
+  @media (prefers-reduced-motion:reduce){.page.signed .drip{animation:none;height:15%}}
   .sign form{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;}
   .sign input{flex:1 1 14rem;min-width:0;background:var(--soot);border:1px solid var(--rule);color:var(--bone);font-family:var(--type);font-size:1rem;padding:.8rem 1rem;}
   .sign p{max-width:32rem;color:var(--bone);}
