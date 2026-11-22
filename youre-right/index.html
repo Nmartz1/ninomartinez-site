@@ -59,8 +59,12 @@
   h1 em { display: block; font-style: italic; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; color: var(--blush); font-size: .82em; margin-top: 10px; }
   .lede { font-family: "Cormorant Garamond", Georgia, serif; font-size: 23px; line-height: 1.45; color: #ead9d2; max-width: 470px; margin: 0 0 38px; }
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .gift-line { display: inline-flex; align-items: center; gap: 12px; margin-top: 26px; text-decoration: none; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 20px; color: #f1e2dc; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .gift-line .new { font-style: normal; }
+  .gift-line .arrow { color: var(--gold); font-style: normal; }
+  .gift-line:hover { color: var(--gold-hi); border-color: var(--gold); }
   .quote-card { position: absolute; right: 6%; bottom: 9%; z-index: 3; max-width: 300px; background: rgba(13,7,9,.62); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid var(--line); padding: 20px 22px; }
-  .quote-card p { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 21px; line-height: 1.35; }
+  .quote-card p { transition: opacity .4s; margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 21px; line-height: 1.35; }
   .quote-card small { display: flex; justify-content: space-between; margin-top: 12px; color: var(--gold); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
   .playdot { width: 9px; height: 9px; border-radius: 50%; background: var(--blush); display: inline-block; margin-right: 8px; box-shadow: 0 0 0 4px rgba(233,184,178,.25); }
 
@@ -79,6 +83,19 @@
   .step .n { font-family: "Bodoni Moda", Georgia, serif; font-size: 54px; line-height: 1; }
   .step h3 { font: 600 12px/1.4 Montserrat, sans-serif; letter-spacing: .24em; text-transform: uppercase; margin: 22px 0 10px; color: var(--gold-hi); }
   .step p { margin: 0; color: var(--muted); }
+
+  /* lanes */
+  .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 64px; text-align: left; }
+  .lane { border: 1px solid var(--line); background: rgba(42,12,20,.35); display: grid; grid-template-columns: 0.9fr 1.1fr; overflow: hidden; }
+  .lane.gift { border-color: var(--gold); background: linear-gradient(180deg, #3a0f1a, #22080f); }
+  .lane img { width: 100%; height: 100%; object-fit: cover; min-height: 380px; }
+  .lane .body { padding: 34px 30px; display: flex; flex-direction: column; }
+  .lane h3 { font-family: "Bodoni Moda", Georgia, serif; font-weight: 400; font-size: 32px; margin: 12px 0 10px; line-height: 1.1; }
+  .lane p { color: var(--muted); margin: 0 0 18px; }
+  .lane blockquote { margin: auto 0 22px; padding: 16px 18px; border-left: 2px solid var(--blush); background: rgba(13,7,9,.45); font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.35; color: #f1e2dc; }
+  .lane blockquote small { display: block; margin-top: 8px; font: 500 10px/1.4 Montserrat, sans-serif; font-style: normal; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+  .lane .btn { align-self: flex-start; }
+  .new { display: inline-block; background: var(--blush); color: var(--velvet); font: 600 10px/1 Montserrat, sans-serif; letter-spacing: .22em; text-transform: uppercase; padding: 6px 10px; }
 
   /* performers */
   .people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 64px; }
@@ -135,24 +152,30 @@
     .hero-img::after { background: linear-gradient(0deg, var(--velvet) 0%, rgba(42,12,20,0) 45%), linear-gradient(180deg, rgba(13,7,9,.75), rgba(13,7,9,0) 30%); }
     .hero .wrap { padding-top: 0; padding-bottom: 70px; margin-top: -90px; }
     .quote-card { display: none; }
+    .gift-line { display: block; font-size: 19px; line-height: 1.4; }
+    .gift-line .new { margin-right: 8px; vertical-align: 2px; }
     .steps, .plans { grid-template-columns: 1fr; }
     .step { border-right: 0; border-bottom: 1px solid var(--line); padding: 32px 0; }
     .people { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .person b { font-size: 22px; }
     .promise { grid-template-columns: 1fr; gap: 40px; }
+    .lanes { grid-template-columns: 1fr; }
+    .lane { grid-template-columns: 1fr; }
+    .lane img { min-height: 0; aspect-ratio: 4/3; object-position: center 25%; }
     section { padding: 80px 0; }
   }
 </style>
 </head>
 <body>
 
-<div class="announce">Your first apology, delivered within 48 hours</div>
+<div class="announce">New: send an apology on someone's behalf</div>
 
 <header>
   <div class="wrap">
     <a class="logo" href="#">You're <i>Right</i></a>
     <nav>
       <a href="#performers">The Apologists</a>
+      <a href="#gifts">Send One</a>
       <a href="#how">How It Works</a>
       <a href="#pricing">Pricing</a>
       <a class="btn line" href="#pricing" style="padding:13px 22px">Request</a>
@@ -171,14 +194,27 @@
       <p class="lede">Tell us what happened. One of our Apologists records a sincere, personal apology, made only for you and delivered to your inbox.</p>
       <div class="hero-ctas">
         <a class="btn gold" href="#pricing">Request your apology</a>
-        <a class="btn line" href="#performers">Meet the Apologists</a>
+        <a class="btn line" href="#gifts">Send one for someone</a>
       </div>
+      <a class="gift-line" href="#gifts"><span class="new">New</span> Wrong about the GPS? Let an Apologist tell them for you. <span class="arrow">&rarr;</span></a>
     </div>
   </div>
-  <div class="quote-card">
-    <p>"I should have listened. You deserved better, and I'm so sorry."</p>
-    <small><span><span class="playdot"></span>For Daniel</span><span>1:42</span></small>
+  <div class="quote-card" id="qc">
+    <p id="qc-text">"I should have listened. You deserved better, and I'm so sorry."</p>
+    <small><span><span class="playdot"></span><span id="qc-for">For Daniel</span></span><span id="qc-len">1:42</span></small>
   </div>
+  <script>
+    (function () {
+      var q = [
+        ["\u201cI should have listened. You deserved better, and I'm so sorry.\u201d", "For Daniel", "1:42"],
+        ["\u201cKaren, Dan asked me to tell you: you were right about the GPS. He was wrong.\u201d", "From Dan, for Karen", "0:38"]
+      ], i = 0, t = document.getElementById("qc-text"), f = document.getElementById("qc-for"), l = document.getElementById("qc-len");
+      setInterval(function () {
+        i = (i + 1) % q.length; t.style.opacity = 0;
+        setTimeout(function () { t.textContent = q[i][0]; f.textContent = q[i][1]; l.textContent = q[i][2]; t.style.opacity = 1; }, 400);
+      }, 5000);
+    })();
+  </script>
 </div>
 
 <section id="performers" class="velvet">
@@ -208,7 +244,38 @@
   </div>
 </section>
 
-<section class="velvet">
+<section id="gifts" class="velvet">
+  <div class="wrap center">
+    <div class="kicker">Two Ways To Say Sorry</div>
+    <h2>For you, <em>or on their behalf.</em></h2>
+    <div class="rule"></div>
+    <p class="sub">Hear the apology you've been waiting for, or send the one you owe.</p>
+    <div class="lanes">
+      <div class="lane">
+        <img src="img/maya.jpg" alt="Maya" style="object-position:center 20%">
+        <div class="body">
+          <div class="kicker">For You</div>
+          <h3>The apology you never got.</h3>
+          <p>Private, personal, addressed to you by name. For closure, comfort, or just to finally hear it.</p>
+          <blockquote>"Daniel, you were right. I should have listened, and I'm so sorry."<small>Maya, for Daniel</small></blockquote>
+          <a class="btn line" href="#pricing">Request yours</a>
+        </div>
+      </div>
+      <div class="lane gift">
+        <img src="img/jules.jpg" alt="Jules" style="object-position:center 20%">
+        <div class="body">
+          <div><span class="new">New</span></div>
+          <h3>Send one on their behalf.</h3>
+          <p>Wrong about the GPS? The thermostat? The restaurant? An Apologist delivers your sorry, with style, and tells them exactly who sent it.</p>
+          <blockquote>"Karen, Dan asked me to tell you: you were right about the GPS. He was wrong. He knows. We all know."<small>Jules, on behalf of Dan</small></blockquote>
+          <a class="btn gold" href="#pricing">Send an apology</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="velvet" style="padding-top:30px">
   <div class="wrap center">
     <div class="kicker">Most Requested</div>
     <h2>The apologies <em>you're still waiting for.</em></h2>
@@ -218,7 +285,8 @@
       <span class="moment">The boss who took the credit</span>
       <span class="moment">The date who stood me up</span>
       <span class="moment">The family dinner</span>
-      <span class="moment">"You were right about the directions"</span>
+      <span class="moment">"He was wrong about the GPS"</span>
+      <span class="moment">"I shouldn't have picked the restaurant"</span>
       <span class="moment">Something only you know</span>
     </div>
   </div>
@@ -229,7 +297,7 @@
     <div class="kicker">Pricing</div>
     <h2>One video. <em>One price.</em></h2>
     <div class="rule"></div>
-    <p class="sub">No subscriptions, no account needed to browse.</p>
+    <p class="sub">No subscriptions. Every plan can be for you or sent as a gift.</p>
     <div class="plans">
       <div class="plan">
         <h3>The Quick Sorry</h3>
@@ -262,7 +330,7 @@
       <ul class="promise-list">
         <li>Apologists speak as themselves, never as a real person you name.</li>
         <li>Nothing sexual or explicit, ever. This is about being heard.</li>
-        <li>No videos meant to deceive or be sent to someone else.</li>
+        <li>Gift apologies always say who sent them. No pranks meant to deceive.</li>
         <li>Apologists may decline any request, and are paid either way.</li>
         <li>Your story stays private. We never share it.</li>
         <li>You must be 18 or older to request a video.</li>
@@ -277,6 +345,7 @@
     <div class="faq">
       <details><summary>Is it a real apology?</summary><p>It's a real person saying it to you, sincerely, about your story. It won't come from the person who hurt you, and we're honest about that. For many people, hearing the words out loud is what matters.</p></details>
       <details><summary>Can she pretend to be my ex?</summary><p>No. Apologists apologize in their own name and voice. We never impersonate anyone.</p></details>
+      <details><summary>Can I send one to someone else?</summary><p>Yes. Choose "on their behalf," tell us their first name and what you're sorry for, and we'll send them a private link. The Apologist always says who it's from, so it lands as a gesture, never a trick.</p></details>
       <details><summary>What if I don't love my video?</summary><p>The Real Apology and Closure include complimentary redos. If something went wrong on our side, we refund you.</p></details>
       <details><summary>Is this therapy?</summary><p>No. If you're carrying something heavy, a counselor is a better first call. In the US you can call or text 988 any time, day or night.</p></details>
     </div>
